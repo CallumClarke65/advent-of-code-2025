@@ -1,8 +1,8 @@
 import "dotenv/config"
-import { getInputCodes } from "./getInputCodes";
+import { getInputRaw } from "../shared/getInputRaw";
 
 async function main() {
-    const inputCodes = await getInputCodes()
+    const inputCodes = (await getInputRaw(1)).split('\n')
     const startPos = 50;
     const dialAtZeroCount = await doManyRotations(startPos, inputCodes)
     console.log(`The dial was at position 0 ${dialAtZeroCount} time${dialAtZeroCount > 0 ? 's' : ''}`)

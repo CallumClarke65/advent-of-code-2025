@@ -1,6 +1,6 @@
-export async function getInputCodes(): Promise<string[]> {
+export async function getInputRaw(day: number): Promise<string> {
     const sessionCookie = process.env.SESSION_COOKIE
-    const url = `https://adventofcode.com/2025/day/1/input`;
+    const url = `https://adventofcode.com/2025/day/${day}/input`;
 
     const res = await fetch(url, {
         method: "GET",
@@ -16,5 +16,5 @@ export async function getInputCodes(): Promise<string[]> {
     }
 
     const rawText = await res.text()
-    return rawText.trimEnd().split('\n')
+    return rawText.trimEnd()
 }
