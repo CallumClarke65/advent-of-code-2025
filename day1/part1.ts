@@ -1,31 +1,11 @@
 import "dotenv/config"
+import { getInputCodes } from "./getInputCodes";
 
 async function main() {
     const inputCodes = await getInputCodes()
     const startPos = 50;
     const dialAtZeroCount = await doManyRotations(startPos, inputCodes)
     console.log(`The dial was at position 0 ${dialAtZeroCount} time${dialAtZeroCount > 0 ? 's' : ''}`)
-}
-
-async function getInputCodes(): Promise<string[]> {
-    const sessionCookie = process.env.SESSION_COOKIE
-    const url = `https://adventofcode.com/2025/day/1/input`;
-
-    const res = await fetch(url, {
-        method: "GET",
-        headers: {
-            "Cookie": `session=${sessionCookie}`,
-            "User-Agent":
-                "github.com/CallumClarke65-ts",
-        },
-    });
-
-    if (!res.ok) {
-        throw new Error(`Failed: ${res.status} ${res.statusText}`);
-    }
-
-    const rawText = await res.text()
-    return rawText.trimEnd().split('\n')
 }
 
 export async function doRotation(startingPos: number, input: string): Promise<number> {
