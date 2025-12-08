@@ -1,3 +1,5 @@
+import "dotenv/config"
+
 export async function getInputRaw(day: number): Promise<string> {
     const sessionCookie = process.env.SESSION_COOKIE
     const url = `https://adventofcode.com/2025/day/${day}/input`;
@@ -10,7 +12,7 @@ export async function getInputRaw(day: number): Promise<string> {
                 "github.com/CallumClarke65-ts",
         },
     });
-
+    
     if (!res.ok) {
         throw new Error(`Failed: ${res.status} ${res.statusText}`);
     }
