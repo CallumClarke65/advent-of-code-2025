@@ -7,8 +7,6 @@ async function main() {
     const inputBatteryBanks = (await getInputRaw(3)).split('\n')
     const totalMaxJoltage = await findTotalMaxJoltage(inputBatteryBanks)
 
-
-
     console.log(`The total output joltage is ${totalMaxJoltage} jolts`)
 }
 
