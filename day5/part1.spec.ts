@@ -1,5 +1,6 @@
 import { expect, test } from 'vitest'
-import { findFreshIngredients, getIngredientsDefinition, IngredientsDefinition } from './part1'
+import { findFreshIngredients } from './part1'
+import { getIngredientsDefinition, IngredientsDefinition } from './shared'
 
 const testIngredientsRawInput = 
 '3-5\n10-14\n16-20\n12-18\n\n1\n5\n8\n11\n17\n32'
