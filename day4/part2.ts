@@ -19,7 +19,6 @@ export async function totalNumberOfAccessibleRolls(grid: number[][]): Promise<nu
         const currentAccessibleRolls = await getAccessibleRollsGrid(currentGrid)
         rollsRemovedThisRunCount = currentAccessibleRolls.flat().filter(i => i == 1).length;
         totalRollsRemoved += rollsRemovedThisRunCount
-        console.log(`Removed ${rollsRemovedThisRunCount} this run, TOTAL ${totalRollsRemoved}`)
         
         currentGrid = currentAccessibleRolls.map((r) => {
             return r.map((v) => (v == 0) ? 1 : 0)
@@ -72,8 +71,6 @@ export async function getAccessibleRollsGrid(grid: number[][]): Promise<number[]
         }
     }
 
-    //console.log(adjacencyCounts)
-
     const a =  adjacencyCounts.map(r => {
         return r.map(v => {
             if (v == -1) {
@@ -85,8 +82,6 @@ export async function getAccessibleRollsGrid(grid: number[][]): Promise<number[]
              return 0
         })
     })
-
-    //console.log(a)
 
     return a
 }
