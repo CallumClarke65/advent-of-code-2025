@@ -1,5 +1,6 @@
 import "dotenv/config"
 import { getInputRaw } from "../shared/getInputRaw";
+import { Puzzle, solvePuzzle } from "./shared";
 
 async function main() {
     const rawInput = await getInputRaw(6)
@@ -10,11 +11,6 @@ async function main() {
         total += await solvePuzzle(p);
     }
     console.log(`The grand total of all the puzzle solutions is ${total}`);
-}
-
-export type Puzzle = {
-    numbers: number[],
-    operation: '+' | '*'
 }
 
 export async function parsePuzzles(rawInput: string): Promise<Puzzle[]> {
@@ -60,15 +56,6 @@ export async function parsePuzzles(rawInput: string): Promise<Puzzle[]> {
     }
 
     return puzzles
-}
-
-export async function solvePuzzle(puzzle: Puzzle): Promise<number> {
-    switch (puzzle.operation) {
-        case '*':
-            return puzzle.numbers.reduce((s, v) => s * v)
-        case '+':
-            return puzzle.numbers.reduce((s, v) => s + v)
-    }
 }
 
 main()
