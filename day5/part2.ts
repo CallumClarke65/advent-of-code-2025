@@ -20,8 +20,6 @@ export async function findNumberOfFreshIngredientIDs(ingredientsDefinition: Ingr
     const orderedRanges = ingredientsDefinition.freshRanges.sort((a, b) => a.start - b.start)
 
     for (const freshRange of orderedRanges) {
-        console.log(`Processing range ${JSON.stringify(freshRange)}`)
-
         // Figure out if there's any overlaps with already processedRanges
         const overlappingRanges = processedRanges.filter((pfr) => {
             return (
@@ -30,15 +28,10 @@ export async function findNumberOfFreshIngredientIDs(ingredientsDefinition: Ingr
             )
         })
 
-        if(overlappingRanges.length > 0) {
-            console.log(`Found overlapping ranges- ${JSON.stringify(overlappingRanges)}`)
-        }
-
         let unProcessedIDmin: number = freshRange.start;
         let unProcessedIDmax: number = freshRange.end;
 
         for (const or of overlappingRanges) {
-            console.log(`or.start - ${or.start}, or.end - ${or.end}, fr.start - ${freshRange.start}, fr.end - ${freshRange.end}, max - ${unProcessedIDmax}, min - ${unProcessedIDmin}`)
 
             if(or.end === freshRange.start && or.end === unProcessedIDmin) {
                 unProcessedIDmin++;
@@ -50,16 +43,13 @@ export async function findNumberOfFreshIngredientIDs(ingredientsDefinition: Ingr
 
             if (or.start > freshRange.start && or.start < freshRange.end && or.start < unProcessedIDmax) {
                 unProcessedIDmax = or.start - 1
-                console.log(`unProcessedIDmax ${unProcessedIDmax}`)
             }
 
             if (or.end < freshRange.end && or.end > freshRange.start && or.end > unProcessedIDmin) {
                 unProcessedIDmin = or.end + 1
-                console.log(`unProcessedIDmin ${unProcessedIDmin}`)
             }
 
             if (or.start <= freshRange.start && or.end >= freshRange.end) {
-                console.log(`Ignoring range entirely`)
                 unProcessedIDmax = -1
                 unProcessedIDmin = 0
                 continue;
@@ -69,7 +59,6 @@ export async function findNumberOfFreshIngredientIDs(ingredientsDefinition: Ingr
 
         if(unProcessedIDmax >= unProcessedIDmin) {
             numberOfFreshIngredientIDs += (unProcessedIDmax - unProcessedIDmin + 1)
-            console.log(`Added to count ${numberOfFreshIngredientIDs} (${unProcessedIDmax} - ${unProcessedIDmin} + 1)`)
         }
 
         processedRanges.push(freshRange)
