@@ -11,11 +11,11 @@ async function main() {
     const rawInput = await getInputRaw(8)
     const playground = new Playground(rawInput)
 
-    playground.connectMultiplePairs(1000)
+    const lastConnection = playground.connectAllJunctionBoxes()
 
-    console.log(`The product of the sizes of the three largest circuits is ${playground.findProductOfThreeLargestCircuits()}`)
+    console.log(`The product of the x co-ords of the last connected jbs is ${lastConnection.jba.x * lastConnection.jbb.x}`)
     console.log(`Elapsed time - ${sw.stop()}`)
-    // Elapsed time - 00:04.892
+    // Elapsed time - 00:20.311
 }
 
 main()
