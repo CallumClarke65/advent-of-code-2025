@@ -16,6 +16,7 @@
   "main": "index.js",
   "scripts": {
     "sln": "tsx shared/solution.ts",
+    "debug": "tsx shared/debug.ts",
     "test": "vitest"
   },
   "devDependencies": {
